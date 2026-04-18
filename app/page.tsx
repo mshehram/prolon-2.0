@@ -5,6 +5,7 @@ import OfferingsSection from "@/components/OfferingsSection"
 import InfoSection from "@/components/InfoSection"
 import ResearchSection from "@/components/ResearchSection"
 import FastingCommunity from "@/components/FastingCommunity"
+import BenefitsSection from "@/components/BenefitsSection"
 
 export default function Home() {
   return (
@@ -16,8 +17,9 @@ export default function Home() {
        <OfferingsSection/>
        <InfoSection/>
        <ResearchSection/>
+        <BenefitsSection/>
        <FastingCommunity/>
-      </main>
+            </main>
     </div>
   );
 }
