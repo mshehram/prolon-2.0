@@ -6,6 +6,9 @@ import InfoSection from "@/components/InfoSection"
 import ResearchSection from "@/components/ResearchSection"
 import FastingCommunity from "@/components/FastingCommunity"
 import BenefitsSection from "@/components/BenefitsSection"
+import Newsletter from "@/components/Newsletter"
+import LongevityResearch from "@/components/LongevityResearch"
+import ProductGridSection from "@/components/ProductGridSection"
 
 export default function Home() {
   return (
@@ -19,6 +22,9 @@ export default function Home() {
        <ResearchSection/>
         <BenefitsSection/>
        <FastingCommunity/>
+       <LongevityResearch/>
+       <Newsletter/>
+       <ProductGridSection/>
             </main>
     </div>
   );
