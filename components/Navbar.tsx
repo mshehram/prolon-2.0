@@ -59,7 +59,11 @@ const Navbar: React.FC = () => {
             </div>
             
             <div className="flex items-center cursor-pointer">
-              <span className="text-xl">🇬🇧</span>
+              <img 
+                src="/images/flag.png" 
+                alt="Flag" 
+                className="w-[44px] h-[42px] md:w-[76px] md:h-[44px] object-contain"
+              />
             </div>
           </div>
         </div>
