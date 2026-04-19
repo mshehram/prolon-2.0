@@ -31,7 +31,7 @@ const ProductGridSection = () => {
 
   const filteredProducts = activeTab === "all" 
     ? products 
-    : products.filter(p => p.category === activeTab);
+    : products.filter(p => p.categories && p.categories.includes(activeTab));
 
   return (
     <section 

@@ -1,6 +1,9 @@
 import React from 'react';
 import Navbar from "@/components/Navbar";
 import QuestionAnswer from "@/components/QuestionAnswer";
+import EmailCustomerService from '@/components/EmailCustomerService';
+import CustomerSupport from "@/components/CustomerSupport"
+import Newsletter from "@/components/Newsletter";
 
 export default function ContactPage() {
   return (
@@ -8,6 +11,9 @@ export default function ContactPage() {
       <Navbar />
       <main className="flex flex-col items-center justify-center">
         <QuestionAnswer />
+        <EmailCustomerService/>
+        <CustomerSupport/>
+         <Newsletter />
       </main>
     </div>
   );
