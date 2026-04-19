@@ -1,4 +1,5 @@
 import React from 'react';
+import Link from 'next/link';
 
 const Hero: React.FC = () => {
   return (
@@ -22,9 +23,11 @@ const Hero: React.FC = () => {
           patented products to promote longevity
         </p>
 
-        <button className="bg-[#56A511] text-white font-serif font-bold text-[14px] leading-[18.2px] uppercase w-full max-w-[415px] h-[45px] rounded-[50px] transition-all tracking-[2px] shadow-[0px_4px_4px_rgba(0,0,0,0.1)] hover:bg-[#4a8e0f]">
-          BUY NOW
-        </button>
+       <Link href="/shop" className="w-full max-w-[415px]">
+  <button className="bg-[#56A511] text-white font-serif font-bold text-[14px] leading-[18.2px] uppercase w-full h-[45px] rounded-[50px] transition-all tracking-[2px] shadow-[0px_4px_4px_rgba(0,0,0,0.1)] hover:bg-[#4a8e0f]">
+    BUY NOW
+  </button>
+</Link>
       </div>
     </section>
   );

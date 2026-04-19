@@ -9,21 +9,19 @@ interface ProductCardProps {
 
 const ProductCard = ({ name, price, currency, image }: ProductCardProps) => {
   return (
-    <div className="bg-[#F4F1EA] w-[268px] h-[298px] flex flex-col items-center justify-between p-8 rounded-sm transition-all hover:shadow-md cursor-pointer group">
-      
-      <div className="flex-1 flex items-center justify-center w-full">
+    <div className="bg-[#F1EAE5] w-[268px] h-[298px] flex flex-col items-center justify-between p-6 rounded-[4px] transition-all hover:brightness-95 cursor-pointer group shadow-sm">
+      <div className="w-[226px] h-[185px] flex items-center justify-center overflow-hidden">
         <img 
           src={image} 
           alt={name} 
-          className="max-w-[226px] max-h-[185px] object-contain transition-transform duration-500 group-hover:scale-105"
+          className="max-w-full max-h-full object-contain transition-transform duration-500 group-hover:scale-105"
         />
       </div>
-      
-      <div className="text-center w-full mt-2">
-        <h3 className="text-[#2A3B2A] text-[18px] font-normal leading-tight mb-2">
+      <div className="text-center w-full mb-2">
+        <h3 className="text-[#1E4036] text-[18px] font-normal leading-tight mb-3">
           {name}
         </h3>
-        <p className="text-[10px] tracking-[0.15em] text-[#2A3B2A]/60 uppercase font-bold">
+        <p className="text-[10px] tracking-[0.1em] text-[#1E4036] opacity-70 uppercase font-bold">
           {currency === 'EUR' ? '€' : currency} {price} EXC. VAT
         </p>
       </div>

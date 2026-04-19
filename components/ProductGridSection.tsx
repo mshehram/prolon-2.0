@@ -31,38 +31,41 @@ const ProductGridSection = () => {
 
   const filteredProducts = activeTab === "all" 
     ? products 
-    : products.filter(p => p.categories.includes(activeTab));
+    : products.filter(p => p.category === activeTab);
 
   return (
-    <section className="bg-[#FAF9F6] py-16 md:py-24 px-4">
-      <div className="max-w-7xl mx-auto">
-        <h2 className="text-2xl md:text-4xl font-light text-center text-[#2A3B2A] mb-10 md:mb-16">
+    <section 
+      className="py-16 md:py-24 w-full"
+      style={{ background: "linear-gradient(180deg, #A8B7AD 0%, #F1EAE5 100%)" }}
+    >
+      <div className="max-w-[1200px] mx-auto px-4">
+        <h2 className="text-2xl md:text-4xl font-light text-center text-[#1E4036] mb-10 md:mb-16">
           Shop Prolon and everyday nutrition
         </h2>
 
-        <div className="flex flex-wrap justify-center gap-4 md:gap-10 border-b border-gray-200 mb-12 overflow-x-auto no-scrollbar whitespace-nowrap">
+        <div className="flex flex-wrap justify-center gap-4 md:gap-10 border-b border-[#1E4036]/20 mb-12 overflow-x-auto no-scrollbar whitespace-nowrap">
           {categories.map((cat) => (
             <button
               key={cat.handle}
               onClick={() => setActiveTab(cat.handle)}
               className={`pb-4 text-[9px] md:text-[10px] font-bold uppercase tracking-[0.2em] transition-all relative ${
-                activeTab === cat.handle ? "text-black" : "text-gray-400 hover:text-black"
+                activeTab === cat.handle ? "text-[#1E4036]" : "text-[#1E4036]/40 hover:text-[#1E4036]"
               }`}
             >
               {cat.name}
               {activeTab === cat.handle && (
-                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-black"></div>
+                <div className="absolute bottom-0 left-0 w-full h-[2px] bg-[#1E4036]"></div>
               )}
             </button>
           ))}
         </div>
 
         {loading ? (
-          <div className="h-64 flex items-center justify-center text-sm tracking-widest text-gray-400">
+          <div className="h-64 flex items-center justify-center text-sm tracking-widest text-[#1E4036]/60">
             LOADING PRODUCTS...
           </div>
         ) : (
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-4 gap-y-8 justify-items-center">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-x-6 gap-y-10 justify-items-center">
             {filteredProducts.map((product) => (
               <ProductCard key={product.id} {...product} />
             ))}
