@@ -49,10 +49,12 @@ const Navbar: React.FC = () => {
           </Link>
           
           <div className="flex items-center justify-center gap-4 text-white w-full md:w-auto">
-            <div className="flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full bg-white/10 text-[13px] md:text-[14px] font-medium font-sans">
-              <span className="hidden sm:inline">HI GIULIA</span>
-              <User size={18} />
-            </div>
+            <Link href="/login">
+              <div className="flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full bg-white/10 text-[13px] md:text-[14px] font-medium font-sans cursor-pointer hover:bg-white/20 transition-all">
+                <span className="hidden sm:inline">HI GIULIA</span>
+                <User size={18} />
+              </div>
+            </Link>
             
             <div className="hidden md:block border border-white/20 p-2 rounded-full bg-white/10">
               <ShoppingCart size={18} />
