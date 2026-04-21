@@ -1,11 +1,33 @@
 "use client";
 
 import React, { useState } from 'react';
-import { Search, User, ShoppingCart, Menu, X } from 'lucide-react';
+import { ShoppingCart, Menu, X, User } from 'lucide-react';
 import Link from 'next/link';
 
 const Navbar: React.FC = () => {
   const [isOpen, setIsOpen] = useState(false);
+
+  const handleLogin = async () => {
+    const shopDomain = process.env.NEXT_PUBLIC_SHOPIFY_STORE_DOMAIN;
+    const clientId = process.env.NEXT_PUBLIC_SHOPIFY_CLIENT_ID;
+
+    try {
+      const response = await fetch(`https://${shopDomain}/.well-known/openid-configuration`);
+      const config = await response.json();
+
+      const authUrl = new URL(config.authorization_endpoint);
+      authUrl.searchParams.append('client_id', clientId!);
+      authUrl.searchParams.append('scope', 'openid email customer-account-api:full');
+      authUrl.searchParams.append('response_type', 'code');
+      authUrl.searchParams.append('redirect_uri', 'http://localhost:3000/api/auth/callback');
+      authUrl.searchParams.append('state', 'random_state_123');
+      authUrl.searchParams.append('nonce', 'random_nonce_123');
+
+      window.location.href = authUrl.toString();
+    } catch (error) {
+      console.error("Login redirect failed:", error);
+    }
+  };
 
   return (
     <div className="absolute top-[20px] md:top-[31px] w-full flex justify-center px-4 z-50">
@@ -49,12 +71,13 @@ const Navbar: React.FC = () => {
           </Link>
           
           <div className="flex items-center justify-center gap-4 text-white w-full md:w-auto">
-            <Link href="/login">
-              <div className="flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full bg-white/10 text-[13px] md:text-[14px] font-medium font-sans cursor-pointer hover:bg-white/20 transition-all">
-                <span className="hidden sm:inline">HI GIULIA</span>
-                <User size={18} />
-              </div>
-            </Link>
+            <div 
+              onClick={handleLogin}
+              className="flex items-center gap-2 border border-white/20 px-3 py-1.5 rounded-full bg-white/10 text-[13px] md:text-[14px] font-medium font-sans cursor-pointer hover:bg-white/20 transition-all"
+            >
+              <span className="hidden sm:inline">HI GIULIA</span>
+              <User size={18} />
+            </div>
             
             <div className="hidden md:block border border-white/20 p-2 rounded-full bg-white/10">
               <ShoppingCart size={18} />
