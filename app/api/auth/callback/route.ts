@@ -27,6 +27,7 @@ export async function GET(request: NextRequest) {
       method: 'POST',
       headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
       body,
+      signal: AbortSignal.timeout(15000),
     });
 
     const tokenData = await response.json();
@@ -34,25 +35,30 @@ export async function GET(request: NextRequest) {
     if (!response.ok) {
       console.log("--- Shopify Token Exchange Failed ---");
       console.log("Status:", response.status);
-      console.log("Payload Sent:", Object.fromEntries(body));
       console.log("Error Response:", tokenData);
-      console.log("-------------------------------------");
       return NextResponse.json(tokenData, { status: response.status });
     }
 
     console.log("Token received successfully");
 
-    const res = NextResponse.redirect(new URL(`/personal-area?token=${tokenData.access_token}`, request.url));
+    // Redirect ko absolute HTTPS URL par force kiya gaya hai
+    const redirectUrl = `https://true-bags-act.loca.lt/personal-area?token=${tokenData.access_token}`;
+    const res = NextResponse.redirect(redirectUrl);
     
+    // Cookies settings for HTTPS
     res.cookies.set('customer_token', tokenData.access_token, { 
       httpOnly: false,
-      secure: process.env.NODE_ENV === 'production',
+      secure: true, 
+      sameSite: 'lax',
       maxAge: 60 * 60 * 24 
     });
     
     return res;
 
-  } catch (error) {
+  } catch (error: any) {
+    if (error.name === 'TimeoutError') {
+      return NextResponse.json({ error: 'Request Timeout' }, { status: 408 });
+    }
     console.error("Network or Parsing Error:", error);
     return NextResponse.json({ error: 'Internal Server Error' }, { status: 500 });
   }
