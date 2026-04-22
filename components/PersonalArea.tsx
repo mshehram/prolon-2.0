@@ -57,7 +57,7 @@ const PersonalArea = () => {
         }
 
         const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
-        const apiVersion = "2026-04"; 
+        const apiVersion = "2024-04"; 
 
         const response = await fetch(
           `https://shopify.com/${shopId}/account/customer/api/${apiVersion}/graphql`, 
@@ -65,7 +65,7 @@ const PersonalArea = () => {
             method: 'POST',
             headers: {
               'Content-Type': 'application/json',
-              'Authorization': `Bearer ${token}`, 
+              'Authorization': token, 
             },
             body: JSON.stringify({ query: CUSTOMER_QUERY }),
           }
@@ -95,7 +95,7 @@ const PersonalArea = () => {
   const handleLogin = () => {
     const shopId = process.env.NEXT_PUBLIC_SHOP_ID;
     const clientId = process.env.NEXT_PUBLIC_SHOPIFY_CLIENT_ID;
-    const redirectUri = encodeURIComponent("https://true-bags-act.loca.lt/api/auth/callback");
+    const redirectUri = encodeURIComponent("https://animal-cytoplasm-showing.ngrok-free.dev/api/auth/callback");
 
     const scopeList = [
       "openid",

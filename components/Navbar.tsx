@@ -19,7 +19,7 @@ const Navbar: React.FC = () => {
       authUrl.searchParams.append('client_id', clientId!);
       authUrl.searchParams.append('scope', 'openid email customer-account-api:full');
       authUrl.searchParams.append('response_type', 'code');
-      authUrl.searchParams.append('redirect_uri', 'https://true-bags-act.loca.lt/api/auth/callback');
+      authUrl.searchParams.append('redirect_uri', 'https://animal-cytoplasm-showing.ngrok-free.dev/api/auth/callback');
       authUrl.searchParams.append('state', 'random_state_123');
       authUrl.searchParams.append('nonce', 'random_nonce_123');
 

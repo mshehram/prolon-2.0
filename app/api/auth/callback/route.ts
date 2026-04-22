@@ -13,21 +13,26 @@ export async function GET(request: NextRequest) {
   const clientId = process.env.NEXT_PUBLIC_SHOPIFY_CLIENT_ID;
 
   try {
-    const discovery = await fetch(`https://${shopDomain}/.well-known/openid-configuration`);
+    const discovery = await fetch(`https://${shopDomain}/.well-known/openid-configuration`, {
+      headers: { 'Bypass-Tunnel-Reminder': 'true' }
+    });
     const config = await discovery.json();
 
     const body = new URLSearchParams({
       grant_type: 'authorization_code',
       client_id: clientId!,
-      redirect_uri: 'https://true-bags-act.loca.lt/api/auth/callback',
+      redirect_uri: 'https://animal-cytoplasm-showing.ngrok-free.dev/api/auth/callback',
       code: code,
     });
 
     const response = await fetch(config.token_endpoint, {
       method: 'POST',
-      headers: { 'Content-Type': 'application/x-www-form-urlencoded' },
+      headers: { 
+        'Content-Type': 'application/x-www-form-urlencoded',
+        'Bypass-Tunnel-Reminder': 'true'
+      },
       body,
-      signal: AbortSignal.timeout(15000),
+      signal: AbortSignal.timeout(30000),
     });
 
     const tokenData = await response.json();
@@ -41,11 +46,10 @@ export async function GET(request: NextRequest) {
 
     console.log("Token received successfully");
 
-    // Redirect ko absolute HTTPS URL par force kiya gaya hai
-    const redirectUrl = `https://true-bags-act.loca.lt/personal-area?token=${tokenData.access_token}`;
+    // Yahan redirect link ko /personal-area se badal kar /login kar diya gaya hai
+    const redirectUrl = `https://animal-cytoplasm-showing.ngrok-free.dev/login?token=${tokenData.access_token}`;
     const res = NextResponse.redirect(redirectUrl);
     
-    // Cookies settings for HTTPS
     res.cookies.set('customer_token', tokenData.access_token, { 
       httpOnly: false,
       secure: true, 
